@@ -1,5 +1,10 @@
 #ifndef ERRORS
 #define ERRORS
+#define FILE_OPEN_ERROR -1
+
+#define FILE_CLOSE_ERROR -2
+
+#define FILE_WRITE_ERROR -3
 
 #include "PublicIncludes.h"
 
@@ -63,6 +68,14 @@ struct FileOpenError : public exception {
     string filePath;
 
     FileOpenError(string filePath);
+
+    string error();
+};
+
+struct FilePtrMoveError : public exception {
+    string filePath;
+
+    FilePtrMoveError(string filePath);
 
     string error();
 };

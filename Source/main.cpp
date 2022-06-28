@@ -3,6 +3,7 @@
 #include "Writer.h"
 #include "TableManager.h"
 #include "Reader.h"
+#include "Checker.h"
 
 void get_info(vector<TableInfo> &table_info_vec, vector<AttributeInfo> &attr_info_vec);
 
@@ -10,24 +11,28 @@ void task2();
 
 int main() {
     system("chcp 65001");
-
-    int table_id = 1001;
+    TableManager tableManager1(1001);
     Block block;
-    block.insert({"hello", "cpp"}, vector<string>(2, ""));
-    block.insert({"good", "bug"}, vector<string>(2, ""));
-    TableManager tableManager1;
-    TableManager tableManager2;
-    tableManager1.tableId = 1001;
+    for (int i = 0; i < 300; i++) {
+        tableManager1.insert_data({"hello", "cpp"}, vector<string>(2, ""));
+    }
+
+
+    TableManager tableManager2(1002);
     tableManager1.blocks.emplace_back(block);
 
-    try {
-        tableManager1.save();
-    } catch (FileOpenError &e) {
-        cout << e.error() << endl;
-    }
+
+    tableManager1.save();
+
     tableManager2.load(to_string(tableManager1.tableId));
 
-    tableManager2.blocks[0].print();
+
+    for (Block &block:tableManager2.blocks) {
+        cout << block.tuple_datas.size() << endl;
+    }
+
+
+//    cout << "共有 : " << tableManager2.blocks.size() << endl;
     return 0;
 }
 

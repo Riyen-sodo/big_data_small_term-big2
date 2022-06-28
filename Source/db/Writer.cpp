@@ -23,16 +23,19 @@ void Writer::writeString(string str) {
 
 void Writer::save(string filePath) {
     filePath = "./db_folder/" + filePath;
-    FILE *fp = fopen(filePath.c_str(), "wb");
+    FILE *fp = fopen(filePath.c_str(), "ab");
     if (fp == nullptr) {
-        throw FileOpenError(filePath);
+        exit(FILE_OPEN_ERROR);
     }
-    cout << "fwrite : " << fwrite(buffer, BLOCK_SIZE, 1, fp) << endl;
-//    if ( != BLOCK_SIZE) {
+
+    // fwrite : return _Count
+    if (fwrite(buffer, BLOCK_SIZE, 1, fp) != 1) {
 //        throw FileWriteError(filePath);
-//    }
+        exit(FILE_WRITE_ERROR);
+    }
     if (fclose(fp) != 0) {
-        throw FileCloseError(filePath);
+//        throw FileCloseError(filePath);
+        exit(FILE_CLOSE_ERROR);
     }
 }
 

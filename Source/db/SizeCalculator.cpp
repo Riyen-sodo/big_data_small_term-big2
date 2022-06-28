@@ -6,7 +6,7 @@
 int SizeCalculator::get_string_vec_size(const vector <string>& string_vec) {
     int size = 0;
     for (const auto& x : string_vec) {
-        size += x.size();
+        size += x.size() + 1;
     }
     return size;
 }

@@ -9,8 +9,10 @@
 
 int Block::get_size() {
     int size = PageHeaderData::get_size() + Special::get_size();
-    size += SizeCalculator::get_tuple_vec_size(this->tuple_datas);
-    size += SizeCalculator::get_item_vec_size(this->items);
+    size += this->items.size() * Item::get_size();
+    for (TupleData &tupleData:this->tuple_datas) {
+        size += tupleData.get_size();
+    }
     return size;
 }
 
@@ -21,7 +23,8 @@ void Block::set_table_id(int table_id) {
 void Block::insert(const vector<string> &data_vec, const vector<string> &attr_desc) {
 
     // TupleData 的大小
-    int data_size = SizeCalculator::get_string_vec_size(data_vec) + sizeof(SIZE_T);
+    int data_size = SizeCalculator::get_string_vec_size(data_vec) + (2 * sizeof(int)) * attr_desc.size();
+    data_size += Item::get_size() + PageHeaderData::get_size() + Special::get_size() + sizeof(int);
 
     // 如果块内空间不足，则抛出异常
     int free_space = this->phd.free_space_end - this->phd.free_space_start;
@@ -51,6 +54,9 @@ void Block::insert(const vector<string> &data_vec, const vector<string> &attr_de
 }
 
 void Block::print() {
+    if (this->tuple_datas.size() == 0) {
+        return;
+    }
     int block_id = this->phd.table_id;
     cout << "========================  Start Block (" << block_id
          << ")  ========================\n"
@@ -66,6 +72,7 @@ void Block::print() {
     for (TupleData td : this->tuple_datas) {
         td.print();
     }
+
     cout << "\n\n===========  Special  ===========" << endl;
     this->special.print();
     cout << "\n\n========================  End Block (" << block_id

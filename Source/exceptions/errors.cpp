@@ -45,3 +45,11 @@ FileOpenError::FileOpenError(string filePath) {
 string FileOpenError::error() {
     return this->filePath + " open failed!";
 }
+
+FilePtrMoveError::FilePtrMoveError(string filePath) {
+    this->filePath = filePath;
+}
+
+string FilePtrMoveError::error() {
+    return this->filePath + " fseek failed!";
+}
