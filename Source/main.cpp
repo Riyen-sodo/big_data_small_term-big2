@@ -4,6 +4,11 @@
 #include "TableManager.h"
 #include "Reader.h"
 #include "Checker.h"
+#include "FilterExpression.h"
+
+#define SHOW_BLOCK_NUM 1<<1
+
+const int run_mode = 1 << 0;
 
 void get_info(vector<TableInfo> &table_info_vec, vector<AttributeInfo> &attr_info_vec);
 
@@ -11,40 +16,27 @@ void task2();
 
 int main() {
     system("chcp 65001");
-    TableManager tableManager1(1001);
-    Block block;
-    for (int i = 0; i < 300; i++) {
-        tableManager1.insert_data({"hello", "cpp"}, vector<string>(2, ""));
-    }
+//    task2();
+//    TableManager pg_class(1001);
+//    TableManager pg_attribute(1002);
+//    pg_class.load("1001");
+//    pg_attribute.load("1002");
+//    for (Block &block:pg_attribute.blocks) {
+//        block.print();
+//    }
 
-
-    TableManager tableManager2(1002);
-    tableManager1.blocks.emplace_back(block);
-
-
-    tableManager1.save();
-
-    tableManager2.load(to_string(tableManager1.tableId));
-
-
-    for (Block &block:tableManager2.blocks) {
-        cout << block.tuple_datas.size() << endl;
-    }
-
-
-//    cout << "共有 : " << tableManager2.blocks.size() << endl;
     return 0;
 }
 
-/*
+
 void task2() {
     int pg_class_id = 1001;
     int pg_attribute_id = 1002;
     int pg_student_id = 1003;
-    BlockManager pg_class(pg_class_id);
-    BlockManager pg_attribute(pg_attribute_id);
-    BlockManager pg_student(pg_student_id);
-    int insert_times = 200;
+    TableManager pg_class(pg_class_id);
+    TableManager pg_attribute(pg_attribute_id);
+    TableManager pg_student(pg_student_id);
+    int insert_times = 300;
     // 创建表
     {
         vector<TableInfo> table_info_vec;
@@ -55,44 +47,35 @@ void task2() {
         // 创建 pg_class 与 pg_attribute 表
         for (TableInfo &tableInfo : table_info_vec) {
             vector<string> pg_class_data_vec = tableInfo.to_string_vec();
-            pg_class.insert(pg_class_data_vec, vector<string>(pg_class_data_vec.size(), ""));
+            pg_class.insert_data(pg_class_data_vec, vector<string>(pg_class_data_vec.size(), ""));
         }
 
 
         for (AttributeInfo &attributeInfo : attr_info_vec) {
             vector<string> pg_attr_data_vec = attributeInfo.to_string_vec();
-            pg_attribute.insert(pg_attr_data_vec, vector<string>(pg_attr_data_vec.size(), ""));
+            pg_attribute.insert_data(pg_attr_data_vec, vector<string>(pg_attr_data_vec.size(), ""));
         }
 
         // 创建学生表
         for (int i = 0; i < insert_times; i++) {
             StudentInfo studentInfo(i + 1, get_random_name(4), int(rand() % 10 + 18));
             vector<string> pg_stu_data_vec = studentInfo.to_string_vec();
-            pg_student.insert(pg_stu_data_vec, vector<string>(pg_stu_data_vec.size(), ""));
+            pg_student.insert_data(pg_stu_data_vec, vector<string>(pg_stu_data_vec.size(), ""));
         }
     }
-//
-//     将表保存到文件中
+
+    // 打印数据
     {
-        BlockManager::to_file(pg_class);
-        BlockManager::to_file(pg_attribute);
-        BlockManager::to_file(pg_student);
+        if (run_mode & (SHOW_BLOCK_NUM)) {
+            cout << "pg_class block num: " << pg_class.blocks.size() << endl;
+            cout << "pg_attribute block num: " << pg_attribute.blocks.size() << endl;
+            cout << "pg_student block num: " << pg_student.blocks.size() << endl;
+        }
     }
 
-    // 从文件中读取表，并打印
-    {
-        BlockManager pg_class_buffer;
-        BlockManager::from_file(pg_class_buffer, pg_class_id);
-        pg_class_buffer.print();
-
-        BlockManager pg_attribute_buffer;
-        BlockManager::from_file(pg_attribute_buffer, pg_attribute_id);
-        pg_attribute_buffer.print();
-
-        BlockManager pg_student_buffer;
-        BlockManager::from_file(pg_student_buffer, pg_student_id);
-        pg_student_buffer.print();
-    }
+    pg_class.save();
+    pg_attribute.save();
+    pg_student.save();
 }
 
 void get_info(
@@ -108,7 +91,6 @@ void get_info(
             TableInfo("pg_attribute", pg_attribute_id, 6),
             TableInfo("pg_student", pg_student_id, 3)
     };
-
 
     vector<AttributeInfo> attr_info_vec_template = {
             // pg_class 表的属性
@@ -133,5 +115,32 @@ void get_info(
 
     table_info_vec = table_info_vec_template;
     attr_info_vec = attr_info_vec_template;
+}
+
+
+
+/*
+void test() {
+    TableManager tableManager1(1001);
+    Block block;
+    for (int i = 0; i < 300; i++) {
+        tableManager1.insert_data({"hello", "cpp", "language"}, vector<string>(3, ""));
+    }
+
+    for (Block &block:tableManager1.blocks) {
+        cout << block.tuple_datas.size() << endl;
+    }
+    TableManager tableManager2(1002);
+    tableManager1.blocks.emplace_back(block);
+
+
+    tableManager1.save();
+
+    tableManager2.load(to_string(tableManager1.tableId));
+
+
+    for (Block &block:tableManager2.blocks) {
+        cout << block.tuple_datas.size() << endl;
+    }
 }
 */

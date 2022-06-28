@@ -6,6 +6,8 @@
 
 #define FILE_WRITE_ERROR -3
 
+#define MEMORY_COPY_ERROR -4
+
 #include "PublicIncludes.h"
 
 /**
@@ -78,6 +80,14 @@ struct FilePtrMoveError : public exception {
     FilePtrMoveError(string filePath);
 
     string error();
+};
+
+struct MemoryCopyError : public exception {
+    const char *what() const throw();
+};
+
+struct ExpressionError : public exception {
+    const char *what() const throw();
 };
 
 #endif

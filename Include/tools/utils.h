@@ -4,7 +4,7 @@
 #include "PublicIncludes.h"
 
 
-vector<string> get_folder_filenames(const string& folder);
+vector<string> get_folder_filenames(const string &folder);
 
 
 /**
@@ -21,5 +21,13 @@ string get_random_name(int len);
  * @return 随机字符串
  */
 vector<string> get_random_string(int m, int n);
+
+/**
+ * 根据 spliter 分隔字符串 str
+ * @param str
+ * @param spliter
+ * @return
+ */
+vector<string> split_string(string str, char spliter);
 
 #endif

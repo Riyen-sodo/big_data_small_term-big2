@@ -40,7 +40,9 @@ void Writer::save(string filePath) {
 }
 
 Writer::~Writer() {
-    free(buffer);
+    if (this->buffer) {
+        free(this->buffer);
+    }
 }
 
 

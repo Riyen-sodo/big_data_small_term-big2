@@ -21,6 +21,7 @@ public:
 
 
     Reader();
+    ~Reader();
 };
 
 #endif //INC_3_READER_H

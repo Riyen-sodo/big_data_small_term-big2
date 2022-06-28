@@ -53,3 +53,11 @@ FilePtrMoveError::FilePtrMoveError(string filePath) {
 string FilePtrMoveError::error() {
     return this->filePath + " fseek failed!";
 }
+
+const char *MemoryCopyError::what() const throw() {
+    return "memcpy error!";
+}
+
+const char *ExpressionError::what() const throw() {
+    return "format of expression error!";
+}

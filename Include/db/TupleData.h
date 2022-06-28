@@ -6,6 +6,9 @@
  *
  */
 #include "PublicIncludes.h"
+#include <iomanip>
+
+using std::setw;
 
 struct TupleData {
     int n_attr;

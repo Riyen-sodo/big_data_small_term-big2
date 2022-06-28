@@ -9,13 +9,10 @@
 #include "SizeCalculator.h"
 #include "utils.h"
 #include "errors.h"
+
 class Checker {
 public:
-    int comsumed;
-
-    Checker();
-
-    void feed(int size);
+    static vector<string> split_string(string str, char spliter);
 };
 
 #endif //INC_3_CHECKER_H

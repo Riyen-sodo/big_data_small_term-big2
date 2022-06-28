@@ -13,4 +13,10 @@ Reader::Reader() {
     offset = 0;
 }
 
+Reader::~Reader() {
+    if (this->buffer) {
+        free(this->buffer);
+    }
+}
+
 

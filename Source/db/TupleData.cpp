@@ -9,7 +9,7 @@
 
 void TupleData::print() {
     for (const string &s : this->datas) {
-        cout << s << "\t";
+        cout << setw(20) << s;
     }
     cout << endl;
 }
