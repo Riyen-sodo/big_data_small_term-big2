@@ -5,6 +5,7 @@
 #include "Reader.h"
 #include "Checker.h"
 #include "FilterExpression.h"
+#include "Comparator.h"
 
 #define SHOW_BLOCK_NUM 1<<1
 
@@ -14,21 +15,37 @@ void get_info(vector<TableInfo> &table_info_vec, vector<AttributeInfo> &attr_inf
 
 void task2();
 
+void task3();
+
 int main() {
     system("chcp 65001");
+    system("echo  program start  *\\(.'_'.)/*   ");
 //    task2();
-//    TableManager pg_class(1001);
-//    TableManager pg_attribute(1002);
-//    pg_class.load("1001");
-//    pg_attribute.load("1002");
-//    for (Block &block:pg_attribute.blocks) {
-//        block.print();
-//    }
+
 
     return 0;
 }
 
+/**
+ * 实验3
+ */
+void task3() {
+    TableManager pg_class(1001);
+    TableManager pg_attribute(1002);
+    TableManager pg_student(1003);
+    pg_class.load("1001");
+    pg_attribute.load("1002");
+    pg_student.load("1003");
 
+    DatabaseManagerSystem dbms;
+    dbms.mount({pg_class, pg_attribute, pg_student});
+    dbms.select("pg_student", {"sno", "sage"}, FilterExpression("sno > 270"), pg_class, pg_attribute);
+}
+
+/**
+ * 实验2
+ * 生成所有表
+ */
 void task2() {
     int pg_class_id = 1001;
     int pg_attribute_id = 1002;

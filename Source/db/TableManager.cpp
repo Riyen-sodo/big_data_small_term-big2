@@ -140,6 +140,9 @@ void TableManager::load(string filePath) {
 
             }
             if (block.tuple_datas.size() > 0) {
+                if (this->empty()) {
+                    this->blocks.erase(this->blocks.begin());
+                }
                 this->blocks.emplace_back(block);
             }
         }
@@ -178,6 +181,16 @@ void TableManager::extend_block(vector<string> data_vec, vector<string> attr_des
     new_b.phd.table_id = this->tableId;
     new_b.insert(data_vec, attr_desc);
     this->blocks.emplace_back(new_b);
+}
+
+bool TableManager::empty() {
+    if (this->blocks.size() == 1 && this->blocks[0].tuple_datas.size() == 0) {
+        return true;
+    }
+    if (this->blocks.empty()) {
+        return true;
+    }
+    return false;
 }
 
 

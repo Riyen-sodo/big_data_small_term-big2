@@ -1,6 +1,8 @@
 
 #include "utils.h"
-
+#include <unordered_map>
+#include <utility>
+#include <unordered_set>
 
 vector<string> get_folder_filenames(const string &folder) {
     vector<string> filenames;
@@ -52,4 +54,23 @@ vector<string> split_string(string str, char spliter) {
     return ret;
 }
 
+bool is_string_vector_repeat(vector<string> stringVec) {
+    std::unordered_map<string, int> strMap;
+    for (const string &str:stringVec) {
+        strMap[str]++;
+    }
+    return strMap.size() == stringVec.size();
+}
 
+
+vector<string> string_vector_deduplication(vector<string> stringVec) {
+    vector<string> ret;
+    std::unordered_set<string> strSet;
+    for (string str:stringVec) {
+        if (strSet.empty() || strSet.count(str) == 0) {
+            ret.push_back(str);
+            strSet.insert(str);
+        }
+    }
+    return ret;
+}

@@ -30,11 +30,11 @@ void Writer::save(string filePath) {
 
     // fwrite : return _Count
     if (fwrite(buffer, BLOCK_SIZE, 1, fp) != 1) {
-//        throw FileWriteError(filePath);
+//        throw FileWriteError(columnName);
         exit(FILE_WRITE_ERROR);
     }
     if (fclose(fp) != 0) {
-//        throw FileCloseError(filePath);
+//        throw FileCloseError(columnName);
         exit(FILE_CLOSE_ERROR);
     }
 }

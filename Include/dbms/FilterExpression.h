@@ -8,11 +8,14 @@
 #include "PublicIncludes.h"
 #include "utils.h"
 #include "errors.h"
+#include "Comparator.h"
+
 struct FilterExpression {
     string column_name;
-    char comparator;
+    char filter;
     string value;
     const char spliter = ' ';
+
     /**
      * 根据字符串初始化表达式
      * @param str
@@ -22,6 +25,16 @@ struct FilterExpression {
     FilterExpression();
 
     void print();
+
+    /**
+     * 检查列值是否复合条件
+     * @param type 列的类型
+     * @param columnValue 列值
+     * @param filterValue 过滤值
+     * @return
+     */
+    bool check(string columnVal);
 };
+
 
 #endif //INC_3_FILTEREXPRESSION_H

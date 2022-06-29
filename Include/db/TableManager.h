@@ -26,6 +26,8 @@ public:
     void insert_data(const vector<string> &data_vec, const vector<string> &attr_desc);
 
     void extend_block(vector<string> data_vec, vector<string> attr_desc);
+
+    bool empty();
 };
 
 #endif //INC_3_TABLEMANAGER_H

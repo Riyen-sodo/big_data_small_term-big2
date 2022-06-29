@@ -12,7 +12,9 @@
 
 class Checker {
 public:
-    static vector<string> split_string(string str, char spliter);
+
 };
+
+
 
 #endif //INC_3_CHECKER_H

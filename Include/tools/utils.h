@@ -30,4 +30,8 @@ vector<string> get_random_string(int m, int n);
  */
 vector<string> split_string(string str, char spliter);
 
+bool is_string_vector_repeat(vector<string> stringVec);
+
+vector<string> string_vector_deduplication(vector<string> stringVec);
+
 #endif

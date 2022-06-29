@@ -61,3 +61,23 @@ const char *MemoryCopyError::what() const throw() {
 const char *ExpressionError::what() const throw() {
     return "format of expression error!";
 }
+
+const char *TypeConvertError::what() const throw() {
+    return "type convert error!";
+}
+
+const char *StringVectorRepeatError::what() const throw() {
+    return "element of string vector repeat!";
+}
+
+const char *VectorIndexError::what() const throw() {
+    return "The index is out of the addressing range of the vector!";
+}
+
+string ColumnMissingError::error() {
+    return "column [" + this->columnName + "] not found!";
+}
+
+ColumnMissingError::ColumnMissingError(string columnName) {
+    this->columnName = columnName;
+}

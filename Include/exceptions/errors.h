@@ -74,6 +74,9 @@ struct FileOpenError : public exception {
     string error();
 };
 
+/**
+ * 文件指针移动异常
+ */
 struct FilePtrMoveError : public exception {
     string filePath;
 
@@ -82,12 +85,47 @@ struct FilePtrMoveError : public exception {
     string error();
 };
 
+/**
+ * 内存拷贝异常
+ */
 struct MemoryCopyError : public exception {
     const char *what() const throw();
 };
 
+/**
+ * 表达式格式错误
+ */
 struct ExpressionError : public exception {
     const char *what() const throw();
+};
+
+/**
+ * 类型转换异常
+ */
+struct TypeConvertError : public exception {
+    const char *what() const throw();
+};
+
+/**
+ * string vector元素重复
+ */
+struct StringVectorRepeatError : public exception {
+    const char *what() const throw();
+};
+
+/**
+ * vector 索引超出范围
+ */
+struct VectorIndexError : public exception {
+    const char *what() const throw();
+};
+
+struct ColumnMissingError : public exception {
+    string columnName;
+
+    ColumnMissingError(string columnName);
+
+    string error();
 };
 
 #endif
