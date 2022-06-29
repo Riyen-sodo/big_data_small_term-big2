@@ -51,8 +51,8 @@ void TableManager::save() {
                 offset -= item.tuple_data_size;
             }
             // 写入 TupleDatas
-            // 反向迭代
-            for (auto tupleData = block.tuple_datas.rbegin(); tupleData != block.tuple_datas.rend(); tupleData++) {
+            // 正向迭代
+            for (auto tupleData = block.tuple_datas.begin(); tupleData != block.tuple_datas.end(); tupleData++) {
                 // 先写入 n_attr  属性数量
                 WRITE_EXTERN_BASIC_TYPE(int, tupleData->n_attr, offset);
                 for (string &str : tupleData->datas) {

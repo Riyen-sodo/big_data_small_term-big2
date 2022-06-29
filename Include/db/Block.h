@@ -21,7 +21,6 @@ struct Block {
     vector<TupleData> tuple_datas;
     Special special;
 
-
     Block();
 
     Block(PageHeaderData phd);
@@ -33,7 +32,6 @@ struct Block {
     void insert(const vector<string> &data_vec, const vector<string> &attr_desc);
 
     void print();
-
 
 };
 

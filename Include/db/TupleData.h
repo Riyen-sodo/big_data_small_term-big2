@@ -11,6 +11,7 @@
 using std::setw;
 
 struct TupleData {
+public:
     int n_attr;
     vector<string> datas;
 
@@ -23,6 +24,7 @@ struct TupleData {
     void serialization(FILE *fp, int &offset);
 
     void deserialize(FILE *fp, int &offset);
+
 
 };
 

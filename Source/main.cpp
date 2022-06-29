@@ -1,11 +1,11 @@
 #include "database.h"
 #include "Dbms.h"
-#include "Writer.h"
 #include "TableManager.h"
-#include "Reader.h"
-#include "Checker.h"
 #include "FilterExpression.h"
 #include "Comparator.h"
+#include "Sorter.h"
+#include "FilePtrManager.h"
+#include "TupleDataComparable.h"
 
 #define SHOW_BLOCK_NUM 1<<1
 
@@ -21,8 +21,30 @@ int main() {
     system("chcp 65001");
     system("echo  program start  *\\(.'_'.)/*   ");
 //    task2();
+//    task3();
 
-
+    vector<TupleDataComparable> tuples;
+    TupleDataComparable tupleDataComparable1(1);
+    TupleDataComparable tupleDataComparable2(1);
+    TupleDataComparable tupleDataComparable3(1);
+    TupleDataComparable tupleDataComparable4(1);
+    vector<string> d1{"Lucy", "85.3"};
+    vector<string> d2{"Nano", "88.3"};
+    vector<string> d3{"Nano", "78.3"};
+    vector<string> d4{"Nano", "68.3"};
+    tupleDataComparable1.insert(d1);
+    tupleDataComparable2.insert(d2);
+    tupleDataComparable3.insert(d3);
+    tupleDataComparable4.insert(d4);
+    tuples.emplace_back(tupleDataComparable1);
+    tuples.emplace_back(tupleDataComparable2);
+    tuples.emplace_back(tupleDataComparable3);
+    tuples.emplace_back(tupleDataComparable4);
+    Sorter sorter;
+    sorter.quickSort(tuples, 0, tuples.size() - 1);
+    for (auto x:tuples) {
+        x.print();
+    }
     return 0;
 }
 

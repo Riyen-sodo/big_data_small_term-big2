@@ -15,12 +15,17 @@ public:
     int tableId;
 
     TableManager(int tableId);
+
     /**
      * 序列化
      * @param block_offset block的索引偏移量
      */
     void save();
 
+    /**
+     * 反序列化
+     * @param filePath
+     */
     void load(string filePath);
 
     void insert_data(const vector<string> &data_vec, const vector<string> &attr_desc);
