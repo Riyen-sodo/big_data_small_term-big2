@@ -22,11 +22,16 @@ public:
      */
     void save();
 
+    void save(string filePath);
+
     /**
      * 反序列化
      * @param filePath
+     * @param readAll 是否读取所有的块
+     * @param blockNum 文件中块的数量
+     * @param blockOffset 从第几个块开始读(从 0 开始)
      */
-    void load(string filePath);
+    void load(string filePath, bool readAll, int &blockNum, int blockOffset);
 
     void insert_data(const vector<string> &data_vec, const vector<string> &attr_desc);
 

@@ -6,6 +6,7 @@
 #include "Sorter.h"
 #include "FilePtrManager.h"
 #include "TupleDataComparable.h"
+#include "BlockReader.h"
 
 #define SHOW_BLOCK_NUM 1<<1
 
@@ -23,28 +24,17 @@ int main() {
 //    task2();
 //    task3();
 
-    vector<TupleDataComparable> tuples;
-    TupleDataComparable tupleDataComparable1(1);
-    TupleDataComparable tupleDataComparable2(1);
-    TupleDataComparable tupleDataComparable3(1);
-    TupleDataComparable tupleDataComparable4(1);
-    vector<string> d1{"Lucy", "85.3"};
-    vector<string> d2{"Nano", "88.3"};
-    vector<string> d3{"Nano", "78.3"};
-    vector<string> d4{"Nano", "68.3"};
-    tupleDataComparable1.insert(d1);
-    tupleDataComparable2.insert(d2);
-    tupleDataComparable3.insert(d3);
-    tupleDataComparable4.insert(d4);
-    tuples.emplace_back(tupleDataComparable1);
-    tuples.emplace_back(tupleDataComparable2);
-    tuples.emplace_back(tupleDataComparable3);
-    tuples.emplace_back(tupleDataComparable4);
-    Sorter sorter;
-    sorter.quickSort(tuples, 0, tuples.size() - 1);
-    for (auto x:tuples) {
-        x.print();
-    }
+
+
+    // TODO task 4
+//    TableManager pg_student(1003);
+//    int pg_student_block_num;
+//    pg_student.load("1003", true, pg_student_block_num, 0);
+//
+//    DatabaseManagerSystem dbms;
+//    dbms.mount({pg_student});
+//
+//    dbms.sort(pg_student, to_string(pg_student.tableId), 1005, 2);
     return 0;
 }
 
@@ -55,13 +45,16 @@ void task3() {
     TableManager pg_class(1001);
     TableManager pg_attribute(1002);
     TableManager pg_student(1003);
-    pg_class.load("1001");
-    pg_attribute.load("1002");
-    pg_student.load("1003");
+    int pg_class_block_num;
+    int pg_attribute_block_num;
+    int pg_student_block_num;
+    pg_class.load("1001", true, pg_class_block_num, 0);
+    pg_attribute.load("1002", true, pg_attribute_block_num, 0);
+    pg_student.load("1003", true, pg_student_block_num, 0);
 
     DatabaseManagerSystem dbms;
     dbms.mount({pg_class, pg_attribute, pg_student});
-    dbms.select("pg_student", {"sno", "sage"}, FilterExpression("sno > 270"), pg_class, pg_attribute);
+    dbms.select("pg_student", {"sno", "sage"}, FilterExpression("sno > 990"), pg_class, pg_attribute);
 }
 
 /**
@@ -75,7 +68,7 @@ void task2() {
     TableManager pg_class(pg_class_id);
     TableManager pg_attribute(pg_attribute_id);
     TableManager pg_student(pg_student_id);
-    int insert_times = 300;
+    int insert_times = 1000;
     // 创建表
     {
         vector<TableInfo> table_info_vec;
@@ -183,3 +176,31 @@ void test() {
     }
 }
 */
+
+/**
+* quick sort test
+*/
+void quick_sort_test() {
+    vector<TupleDataComparable> tuples;
+    TupleDataComparable tupleDataComparable1(1);
+    TupleDataComparable tupleDataComparable2(1);
+    TupleDataComparable tupleDataComparable3(1);
+    TupleDataComparable tupleDataComparable4(1);
+    vector<string> d1{"Lucy", "85.3"};
+    vector<string> d2{"Nano", "88.3"};
+    vector<string> d3{"Nano", "78.3"};
+    vector<string> d4{"Nano", "68.3"};
+    tupleDataComparable1.insert(d1);
+    tupleDataComparable2.insert(d2);
+    tupleDataComparable3.insert(d3);
+    tupleDataComparable4.insert(d4);
+    tuples.emplace_back(tupleDataComparable1);
+    tuples.emplace_back(tupleDataComparable2);
+    tuples.emplace_back(tupleDataComparable3);
+    tuples.emplace_back(tupleDataComparable4);
+    Sorter sorter;
+    sorter.quickSort(tuples, 0, tuples.size() - 1);
+    for (auto x:tuples) {
+        x.print();
+    }
+}

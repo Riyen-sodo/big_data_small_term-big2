@@ -9,7 +9,7 @@ vector<string> get_folder_filenames(const string &folder) {
     for (const auto &file : directory_iterator(folder)) {
         string s = file.path().string();
         for (size_t i = s.size() - 1; i >= 0; i--) {
-            if (s[i] == '\\') {
+            if (s[i] == '\\' or s[i]=='/') {
                 s = s.substr(i + 1, s.size() - 1);
                 break;
             }

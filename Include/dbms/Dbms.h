@@ -8,6 +8,9 @@
 #include "FilterExpression.h"
 #include "TableManager.h"
 #include "utils.h"
+#include "Sorter.h"
+#include "TupleDataComparable.h"
+#include "BlockReader.h"
 
 #define DEBUG 1<<1
 #define SHOW_SELECT 1<<2
@@ -79,6 +82,11 @@ struct DatabaseManagerSystem {
     filtter_result_set(vector<vector<string>> resultSet,
                        FilterExpression filterExpression,
                        vector<string> columnNames);
+
+    void sort(TableManager &tableManager, string filePath, int newTableId, int columnIndexToSort);
+
+
+    void merge_block_in_file(string left, string right);
 };
 
 #endif

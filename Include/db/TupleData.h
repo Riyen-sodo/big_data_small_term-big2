@@ -25,7 +25,6 @@ public:
 
     void deserialize(FILE *fp, int &offset);
 
-
 };
 
 #endif //DEMO2_TUPLEDATA_H
