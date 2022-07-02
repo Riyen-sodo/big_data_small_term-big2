@@ -19,3 +19,13 @@ bool BlockReader::is_space_not_enough(int sizeWillBeWrite) {
     return (this->bufferSize - this->offset) > sizeWillBeWrite;
 }
 
+void BlockReader::set_cache(vector<string> data) {
+    this->cache = data;
+}
+
+BlockReader::~BlockReader() {
+    if (this->buffer) {
+        free(this->buffer);
+    }
+}
+

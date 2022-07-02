@@ -16,6 +16,8 @@ public:
 
     TableManager(int tableId);
 
+    void save_tuple_datas(string filePath);
+
     /**
      * 序列化
      * @param block_offset block的索引偏移量
@@ -38,6 +40,7 @@ public:
     void extend_block(vector<string> data_vec, vector<string> attr_desc);
 
     bool empty();
+
 };
 
 #endif //INC_3_TABLEMANAGER_H

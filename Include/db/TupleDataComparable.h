@@ -25,6 +25,8 @@ public:
     bool operator>=(const TupleDataComparable &tupleDataComparable);
 
     void insert(vector<string> data);
+
+    void insert(TupleData tupleData);
 };
 
 #endif //INC_3_TUPLEDATACOMPLEX_H

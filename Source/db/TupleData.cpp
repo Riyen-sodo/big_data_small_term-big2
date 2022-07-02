@@ -24,7 +24,7 @@ int TupleData::get_size() {
 }
 
 void TupleData::insert(vector<string> data_vec, const vector<string> &attr_desc) {
-    this->datas = std::move(data_vec);
+    this->datas = data_vec;
     this->n_attr = attr_desc.size();
 }
 

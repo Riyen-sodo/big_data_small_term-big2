@@ -11,7 +11,7 @@
  * 对应一个属性（字段）的信息
  * table_name : 所属表名
  * table_id : 所属表的 id
- * column_name : 字段名
+ * attribute_name : 字段名
  * column_type : 字段类型
  * column_bytes_len : 字段长度
  * column_index : 字段在第几列

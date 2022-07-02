@@ -26,6 +26,8 @@ public:
 
     BlockReader(int bufferSize);
 
+    void set_cache(vector<string> data);
+
     ~BlockReader();
 };
 

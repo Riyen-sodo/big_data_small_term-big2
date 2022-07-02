@@ -13,7 +13,6 @@
     offset += sizeof(TYPE)
 
 
-
 class Writer {
 
 public:
@@ -29,8 +28,8 @@ public:
 
     ~Writer();
 
-//private:
     byte *buffer;
+
     int offset;
 
 };

@@ -21,7 +21,6 @@ void Block::set_table_id(int table_id) {
 }
 
 void Block::insert(const vector<string> &data_vec, const vector<string> &attr_desc) {
-
     // TupleData 的大小
     int data_size = SizeCalculator::get_string_vec_size(data_vec) + (2 * sizeof(int)) * attr_desc.size();
     data_size += Item::get_size() + PageHeaderData::get_size() + Special::get_size() + sizeof(int);
@@ -87,7 +86,7 @@ Block::Block(PageHeaderData phd) {
 Block::Block() {
     this->phd = PageHeaderData(
             BLOCK_SIZE - Special::get_size(),
-            PageHeaderData::get_size(),
+            0 + PageHeaderData::get_size(),
             BLOCK_SIZE - Special::get_size(),
             0
     );

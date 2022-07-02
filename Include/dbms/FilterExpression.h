@@ -11,7 +11,7 @@
 #include "Comparator.h"
 
 struct FilterExpression {
-    string column_name;
+    string attribute_name;
     char filter;
     string value;
     const char spliter = ' ';

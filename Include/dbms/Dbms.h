@@ -83,10 +83,22 @@ struct DatabaseManagerSystem {
                        FilterExpression filterExpression,
                        vector<string> columnNames);
 
+    /**
+     * 对块进行内部排序
+     * @param tableManager
+     * @param filePath 要排序的表文件路径
+     * @param newTableId
+     * @param columnIndexToSort 要排序的字段
+     */
     void sort(TableManager &tableManager, string filePath, int newTableId, int columnIndexToSort);
 
-
-    void merge_block_in_file(string left, string right);
+    /**
+     * 将两个块的数据 有序的 合并到一个块中
+     * @param left
+     * @param right
+     * @param columnIndexToSort
+     */
+    void merge_block_in_file(string left, string right, int columnIndexToSort);
 };
 
 #endif

@@ -24,17 +24,17 @@ void Writer::writeString(string str) {
 void Writer::save(string filePath) {
     filePath = "./db_folder/" + filePath;
     FILE *fp = fopen(filePath.c_str(), "ab");
+
     if (fp == nullptr) {
         exit(FILE_OPEN_ERROR);
     }
 
     // fwrite : return _Count
     if (fwrite(buffer, BLOCK_SIZE, 1, fp) != 1) {
-//        throw FileWriteError(columnName);
         exit(FILE_WRITE_ERROR);
     }
+
     if (fclose(fp) != 0) {
-//        throw FileCloseError(columnName);
         exit(FILE_CLOSE_ERROR);
     }
 }

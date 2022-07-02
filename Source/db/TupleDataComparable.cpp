@@ -44,3 +44,8 @@ void TupleDataComparable::insert(vector<string> data) {
     this->datas = data;
 }
 
+void TupleDataComparable::insert(TupleData tupleData) {
+    this->datas = tupleData.datas;
+    this->n_attr = tupleData.n_attr;
+}
+
