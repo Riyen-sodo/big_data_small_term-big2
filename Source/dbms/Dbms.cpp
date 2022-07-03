@@ -415,14 +415,14 @@ void DatabaseManagerSystem::merge_block_in_file(string leftFile, string rightFil
 
     while (i < leftTupleNum && j < rightTupleNum) {
         if (left < right) {
-            cout << "左边写入 : i = " << i << endl;
+//            cout << "左边写入 : i = " << i << endl;
             for (auto x:left.tuple) {
                 cout << x << "  ";
             }
             cout << "\n=======" << endl;
             WRITE_LEFT_TO_TMP_FILE(left_n_attr, left, right, tmpFp);
         } else {
-            cout << "右边写入 : j = " << j << endl;
+//            cout << "右边写入 : j = " << j << endl;
             for (auto x:left.tuple) {
                 cout << x << "  ";
             }

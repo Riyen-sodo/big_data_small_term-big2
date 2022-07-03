@@ -69,12 +69,12 @@ int main() {
 
     // task2();
 
-    // task3();
+     task3();
 
 //    test_read_tmp();
 
     // TODO task 3.2
-    task_3_2();
+//    task_3_2();
 }
 
 /**
